@@ -1,6 +1,5 @@
 # Importing required modules.
 import os
-import pickle
 import random
 
 import cv2
@@ -54,17 +53,17 @@ def split_data(data):
         labels.append(label)
 
     # return images and labels converted to a numpy array.
-    return np.array(images), np.array(labels)
+    return np.array(images) / 255, np.array(labels)
 
 
 def save_data(training_images, training_labels):
     # Getting the path to files.
-    training_images_file = os.path.join(DIRECTORY, "training_images.pkl")
-    training_labels_file = os.path.join(DIRECTORY, "training_labels.pkl")
+    training_images_file = os.path.join(DIRECTORY, "images.npy")
+    training_labels_file = os.path.join(DIRECTORY, "labels.npy")
 
     # Writing to the files.
-    pickle.dump(training_images, open(training_images_file))
-    pickle.dump(training_labels, open(training_labels_file))
+    np.save(training_images_file, training_images)
+    np.save(training_labels_file, training_labels)
 
 
 def main():
